@@ -8,10 +8,10 @@ if [[ ! -d "$url" ]]; then
 fi
 
 cd ~/bass
-touch ~/$url/bass_output.txt
-python3 bass.py -d $url -o ~/$url/bass_output.txt
+touch ~/$url/resolvers.txt
+python3 bass.py -d $url -o ~/$url/resolvers.txt
 
+assetfinder -subs-only $url | sort -u | tee -a ~/$url/subs.txt
 
-massdns () {
-    ./massdns/bin/massdns
-}
+cd ~/massscan/bin
+./massscan -r ~/$url/resolvers.txt -o ~/$url/subs/txt -w $output
